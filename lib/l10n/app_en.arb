@@ -1,0 +1,13 @@
+{
+  "@@locale": "en",
+  "hello": "Hello",
+  "changeLanguage": "Change Language",
+  "darkMode": "Dark Mode",
+  "my": "My",
+  "apiTest": "API Test",
+  "testPage": "Test Page",
+  "inputText": "Please Input Text",
+  "callbackValue": "Callback Value",
+  "switchLanguage": "Switch Language",
+  "switchTheme": "Switch Theme"
+}

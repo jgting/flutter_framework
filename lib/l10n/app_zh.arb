@@ -1,0 +1,13 @@
+{
+  "@@locale": "zh",
+  "hello": "哈囉",
+  "changeLanguage": "切換語言",
+  "darkMode": "深色模式",
+  "my": "我的",
+  "apiTest": "API測試",
+  "testPage": "測試頁",
+  "inputText": "請輸入文字",
+  "callbackValue": "回傳值",
+  "switchLanguage": "切換語言",
+  "switchTheme": "切換主題"
+}
