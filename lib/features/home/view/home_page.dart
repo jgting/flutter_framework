@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/env.dart';
 import '../../../core/webview/webview_utils.dart';
 import '../../../l10n/app_localizations.dart';
 import '../view_model/home_view_model.dart';
@@ -22,9 +23,11 @@ class _HomePageState extends ConsumerState<HomePage> {
     final vm = ref.watch(homeViewModelProvider);
     final locale = ref.watch(localeProvider);
     final themeMode = ref.watch(themeProvider);
+    print("Running Env: ${Env.environment}");
+    print("API: ${Env.apiUrl}");
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.testPage)),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.e1003)),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -32,10 +35,10 @@ class _HomePageState extends ConsumerState<HomePage> {
             // 發送 API 並顯示結果
             ElevatedButton(
               onPressed: () => ref.read(homeViewModelProvider.notifier).fetch(),
-              child: Text(AppLocalizations.of(context)!.apiTest),
+              child: Text(AppLocalizations.of(context)!.e1010),
             ),
             vm.when(
-              data: (todo) => todo == null ? const SizedBox() : Text('${AppLocalizations.of(context)!.callbackValue}: ${todo.title}'),
+              data: (todo) => todo == null ? const SizedBox() : Text('${AppLocalizations.of(context)!.e1002}: ${todo.title}'),
               loading: () => const CircularProgressIndicator(),
               error: (e, _) => Text('錯誤: $e'),
             ),
@@ -44,8 +47,8 @@ class _HomePageState extends ConsumerState<HomePage> {
 
             // 切換語言
             ElevatedButton(
-              onPressed: () => ref.read(localeProvider.notifier).changeLocale(locale.languageCode == 'en' ? 'zh' : 'en'),
-              child: Text('${AppLocalizations.of(context)!.switchLanguage}（目前: ${locale.languageCode}）'),
+              onPressed: () => ref.read(localeProvider.notifier).changeLocale(locale.languageCode == 'en' ? 'ko' : 'en'),
+              child: Text('${AppLocalizations.of(context)!.e1000}（目前: ${locale.languageCode}）'),
             ),
 
             // 切換主題
@@ -60,7 +63,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   mode.state = ThemeMode.light;
                 }
               },
-              child: Text('${AppLocalizations.of(context)!.switchTheme}（目前: ${themeMode.name}）'),
+              child: Text('${AppLocalizations.of(context)!.e1013}（目前: ${themeMode.name}）'),
             ),
 
             const Divider(),

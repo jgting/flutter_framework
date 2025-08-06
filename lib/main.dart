@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_framework/providers/storage_provider.dart';
 import 'package:flutter_framework/services/storage/prefs_storage_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'app/env.dart';
 import 'app/my_app.dart';
 import 'core/websocket/websocket_manager.dart';
 import 'core/websocket/websocket_service.dart';
@@ -12,12 +14,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // 各種初始化放這，例如 Firebase、Storage、Logger...
+  const env = String.fromEnvironment('ENV', defaultValue: 'dev');
+  await dotenv.load(fileName: 'env/.env.$env');
+
   final prefs = await SharedPreferences.getInstance();
   final hive = HiveService();
   await hive.init();
   final wsService = WebSocketService('wss://echo.websocket.events');
   final wsManager = WebSocketManager(wsService);
   wsManager.init();
+  // print("Running Env: ${Env.environment}");
+  // print("API: ${Env.apiUrl}");
   runApp(ProviderScope(
       overrides: [
         prefsStorageProvider.overrideWithValue(PrefsStorageService(prefs)),
